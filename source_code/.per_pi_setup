@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# John Filipowicz
+# Radford University
+
+# Purpose: Run each of the library files needed to setup hardware specific configurations.
+
+sudo python ~/sensor_libraries/DHT/setup.py install
+
+sudo python ~/sensor_libraries/Proximity/setup.py install

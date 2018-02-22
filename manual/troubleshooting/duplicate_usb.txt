@@ -1,0 +1,21 @@
+Entry #1: Duplicate USB
+
+Issue: USB name is taken already, causing hardcoding issues with USB pathing.
+
+How-to-check: "ls /media/pi/" If you see "FEEDER_DATA" and "FEEDER_DATA1" then this problem is in effect.
+
+Resolving: 
+	1: sudo rm -r /media/pi/FEEDER_DATA
+	2: replug the usb drive in
+	3: verify the only one FEEDER_DATA is there, and it does not have a 1 in the name.
+
+
+Details:
+
+This is caused by removing the usb drive while it is writing to disk in some fashion (taking pictures or gathering data, namely). The premature untimely unplugging leaves a directory named FEEDER_DATA in place of the just removed drive. Once you plug the usb back in, there is a name conflict since "FEEDER_DATA" is taken by the previously mentioned directory. The Pi solves the naming conflict by appending a 1 to the end of the newer directory (the actual usb drive). The program is hardcoded for the usb name of "FEEDER_DATA". The program will fail once it attempts to write to disk in the directory called FEEDER_DATA that is not the usb.
+
+The resolution for this is to remove the extra directory (named "FEEDER_DATA") and remount the usb drive. For the sake of simplicity, I recommend replugging the drive in instead of using unix commands to remount it.
+
+To Mitchell:
+
+If you wish to use unix commands to remount it, use the following (unfortunately not exactly like this): "umount [drivelabel/drivenum]", dmesg or fdisk (id the right drive), "mount [drivenum] /media/pi/FEEDER_DATA".

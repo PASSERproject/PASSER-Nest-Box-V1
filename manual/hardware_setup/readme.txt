@@ -1,0 +1,1 @@
+*TODO* hardware setup guide
